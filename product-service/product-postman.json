@@ -1,0 +1,151 @@
+{
+  "info": {
+    "name": "Product Service API",
+    "description": "Postman collection for Product Service (CRUD, inventory, price, status)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "productId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"iPhone 15\",\n  \"description\": \"Apple iPhone 15 128GB\",\n  \"price\": 79999.00,\n  \"availableQuantity\": 50,\n  \"sku\": \"IPH15-128\",\n  \"category\": \"Mobiles\",\n  \"brand\": \"Apple\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Product By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Products By Status",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products?status=ACTIVE",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products"],
+          "query": [
+            { "key": "status", "value": "ACTIVE" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Products By Category",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products?category=Mobiles",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products"],
+          "query": [
+            { "key": "category", "value": "Mobiles" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reduce Inventory",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}/inventory/reduce?quantity=2",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}", "inventory", "reduce"],
+          "query": [
+            { "key": "quantity", "value": "2" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Increase Inventory",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}/inventory/increase?quantity=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}", "inventory", "increase"],
+          "query": [
+            { "key": "quantity", "value": "5" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Activate Product",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}/activate",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}", "activate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deactivate Product",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}/deactivate",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}", "deactivate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Product Price",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/v1/products/{{productId}}/price?price=74999.00",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "products", "{{productId}}", "price"],
+          "query": [
+            { "key": "price", "value": "74999.00" }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

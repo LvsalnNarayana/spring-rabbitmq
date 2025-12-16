@@ -1,0 +1,30 @@
+version: '3.8'  # Modern Compose version; supports healthchecks, etc.
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine         # Official image with management plugin; alpine for smaller size
+    container_name: spring-rabbitmq             # Your specified name
+    restart: unless-stopped                     # Auto-restart on failure/crash
+    ports:
+      - "5672:5672"                             # AMQP for your Spring app
+      - "15672:15672"                           # Management UI[](http://localhost:15672)
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin             # Optional: custom user (better than guest)
+      - RABBITMQ_DEFAULT_PASS=secretpassword    # Change this!
+      - RABBITMQ_DEFAULT_VHOST=/spring-rabbitmq-test                # Default virtual host
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq         # Persist queues/data
+    healthcheck: # Optional but recommended for Spring apps to depend_on properly
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  rabbitmq_data:  # Named volume for persistence (driver defaults to local)
+
+# Networks section is optional here – Compose creates a default bridge network automatically.
+# If you have other services (e.g., your Spring app), they can join this implicitly or explicitly.
+# networks:
+#   spring-rabbitmq-network:
+#     driver: bridge

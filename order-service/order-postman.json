@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "Order Service API",
+    "description": "Postman collection for Order Service (Create, Fetch, Update Status)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "orderId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"address\": {\n    \"line1\": \"Flat 101\",\n    \"line2\": \"Green Apartments\",\n    \"city\": \"Bangalore\",\n    \"state\": \"KA\",\n    \"country\": \"India\",\n    \"postalCode\": \"560001\"\n  },\n  \"products\": [\n    {\n      \"productId\": \"11111111-1111-1111-1111-111111111111\",\n      \"quantity\": 2,\n      \"unitPrice\": 499.99\n    },\n    {\n      \"productId\": \"22222222-2222-2222-2222-222222222222\",\n      \"quantity\": 1,\n      \"unitPrice\": 1299.00\n    }\n  ],\n  \"paymentMethod\": \"UPI\",\n  \"paymentStatus\": \"PENDING\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Order By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/{{orderId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "{{orderId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Orders By Status",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders?status=CONFIRMED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CONFIRMED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Order Status",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/{{orderId}}/status?status=SHIPPED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "{{orderId}}",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "SHIPPED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Order Payment Status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/orders/{{orderId}}/payment-status?paymentStatus=PAID",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v1",
+            "orders",
+            "{{orderId}}",
+            "payment-status"
+          ],
+          "query": [
+            {
+              "key": "paymentStatus",
+              "value": "PAID"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

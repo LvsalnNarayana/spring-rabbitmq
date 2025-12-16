@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "Notification Service API",
+    "description": "Postman collection for Notification Service (create, read, status updates)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+  ],
+  "item": [
+    {
+      "name": "Create Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"user-123\",\n  \"type\": \"ORDER_CREATED\",\n  \"content\": \"Your order has been created successfully\",\n  \"channel\": \"IN_APP\",\n  \"referenceId\": \"11111111-1111-1111-1111-111111111111\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Notification By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications/{{notificationId}}",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications",
+            "{{notificationId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Notifications By User",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications?userId=user-123",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "user-123"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Notifications By Status",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications?status=PENDING",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "PENDING"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mark Notification As Sent",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications/{{notificationId}}/sent",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications",
+            "{{notificationId}}",
+            "sent"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mark Notification As Failed",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications/{{notificationId}}/failed",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications",
+            "{{notificationId}}",
+            "failed"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mark Notification As Read",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "http://localhost:6000/api/v1/notifications/{{notificationId}}/read",
+          "host": [
+            "http://localhost:6000/api"
+          ],
+          "path": [
+            "v1",
+            "notifications",
+            "{{notificationId}}",
+            "read"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
