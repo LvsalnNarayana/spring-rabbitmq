@@ -32,7 +32,7 @@ public class NotificationServices {
     ) {
         NotificationEntity notification = NotificationEntity.builder()
                 .userId(request.getUserId())
-                .type(request.getType())
+                .type(NotificationEntity.NotificationType.valueOf(String.valueOf(request.getType())))
                 .content(request.getContent())
                 .channel(request.getChannel())
                 .referenceId(
